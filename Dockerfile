@@ -96,4 +96,6 @@ RUN python3 -m pip install --upgrade tensorflow-gpu==2.2 keras
 
 RUN python3 -m pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+
 CMD ["/bin/bash"]
