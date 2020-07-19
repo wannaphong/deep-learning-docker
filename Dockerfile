@@ -71,7 +71,10 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         unixodbc-dev \
         unzip \
         vim \
-        wget
+        wget \
+        xfonts-thai
+
+RUN apt-get clean
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
