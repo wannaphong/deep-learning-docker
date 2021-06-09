@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+FROM nvidia/cuda:11.0.3-devel-ubuntu20.04
 
 RUN apt-get update && apt-get upgrade -y --allow-unauthenticated
 
@@ -95,10 +95,10 @@ RUN python3 -m pip --no-cache-dir install \
     python3 -m ipykernel.kernelspec
 
 # Install TensorFlow GPU version.
-RUN python3 -m pip install --upgrade tensorflow-gpu==2.2 keras
+RUN python3 -m pip install --upgrade tensorflow-gpu keras
 
 RUN python3 -m pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 
-CMD ["/bin/bash"]
+CMD ["jupyter notebook --ip 0.0.0.0 --allow-root"]
