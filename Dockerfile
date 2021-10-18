@@ -55,7 +55,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         locales \
         lsb-release \
         make \
-        module-init-tools \
         openjdk-8-jdk \
         pkg-config \
         python3 \
@@ -72,6 +71,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         vim \
         wget \
         xfonts-thai
+RUN apt-get update && apt-get install tasksel && \
+    tasksel install ubuntu-mate-core
 
 RUN apt-get clean
 
@@ -96,8 +97,11 @@ RUN python3 -m pip --no-cache-dir install \
 # Install TensorFlow GPU version.
 RUN python3 -m pip install --upgrade tensorflow-gpu keras
 
-RUN python3 -m pip install torch==1.5.1+cu101 torchvision==0.6.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+RUN python3 -m pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
-
-CMD ["jupyter notebook --ip 0.0.0.0 --allow-root"]
+RUN apt-get install -y x11vnc xvfb 
+RUN mkdir ~/.vnc
+RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
