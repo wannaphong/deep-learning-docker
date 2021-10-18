@@ -72,7 +72,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         wget \
         xfonts-thai
 RUN apt-get update && apt-get install tasksel && \
-    tasksel install ubuntu-mate-core
+    tasksel install -y ubuntu-mate-core
 
 RUN apt-get clean
 
