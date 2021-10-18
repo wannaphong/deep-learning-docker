@@ -74,7 +74,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 RUN apt-get update && apt-get install tasksel && \
     tasksel install -y ubuntu-mate-core
 
-RUN apt-get clean
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
@@ -101,6 +100,7 @@ RUN python3 -m pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudi
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 RUN apt-get install -y x11vnc xvfb 
+RUN apt-get clean
 RUN mkdir ~/.vnc
 RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
 COPY entrypoint.sh /entrypoint.sh
