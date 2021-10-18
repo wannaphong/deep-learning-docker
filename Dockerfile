@@ -40,7 +40,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         libpng-dev \
         libpq-dev \
         libpythia8-dev \
-        libqt4-dev \
         libreadline-dev \
         libsqlite3-dev \
         libssl-dev \
