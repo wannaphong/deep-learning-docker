@@ -71,7 +71,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         vim \
         wget \
         xfonts-thai
-RUN apt-get update && apt-get install tasksel && \
+RUN apt-get update && apt-get install -y tasksel && \
     tasksel install -y ubuntu-mate-core
 
 
