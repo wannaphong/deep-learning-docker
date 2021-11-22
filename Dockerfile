@@ -108,7 +108,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         wget \
         xfonts-thai
 
-
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 RUN python3 -m pip install --upgrade pip && \
@@ -133,3 +132,17 @@ RUN python3 -m pip install --upgrade tensorflow-gpu keras
 RUN python3 -m pip install torch==1.8.2+cu111 torchvision==0.9.2+cu111 torchaudio==0.8.2 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+
+RUN apt update && apt install  openssh-server sudo -y
+
+RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ubuntu
+
+RUN  echo 'ubuntu:ubuntu' | chpasswd
+
+RUN service ssh start
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd","-D"]
+
+RUN rm -rf /var/lib/apt/lists/*
